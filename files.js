@@ -3,18 +3,13 @@
 
 const fs = require('fs');
 
-// READING
-
-/*The following function takes 2 args, 1st is the relative path to the file (The './' signifies the current directory)
-*the second is the callback function to be executed once reading is complete
-*It is an async function
+//WRITING FILES:
+/* 1st arg is the file we want to write to
+* 2nd is the text we want to write
+* 3rd is the callback function that is called when writing is done
+* This is also an async function
 */
-fs.readFile('./docs/someText.txt', (err, data) =>{
-    //This async function takes 2 args,1st is the error if any, 2nd is the data that has been read from the file
-    
-    if(err){
-        console.log(err);
-    }
-    console.log(data); //This line will output the data buffer. To get it in the human readable form, we write:
-    console.log(data.toString());
+
+fs.writeFile('./docs/someText2.txt', 'Hello again', () => {
+    console.log('file was written');
 });
