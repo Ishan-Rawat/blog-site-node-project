@@ -3,7 +3,7 @@
 //READ stream:
 const fs = require('fs');
 
-const readstream = fs.createReadStream('./docs/blog3.txt');
+const readstream = fs.createReadStream('./docs/blog3.txt', {encoding: 'utf-8'}); //this last part makes it so that the chunks are in human readable form
 
 /*The following function is like an event listener. What event does it listen for?
 * That's the first argument. 'data' is the event that is triggered when we receive a new data buffer in the stream.
