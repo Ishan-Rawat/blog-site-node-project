@@ -4,13 +4,25 @@
 const fs = require('fs');
 
 //creating and deleting DIRECTORIES:
-/*
-This function is async. 1st argument is where and what directory to create
-2nd argument is the callback function that is to be called when the directory creation is done
+/*The fs.mkdir() function throws an error if the directory to be created already exists. 0
+* We can check if a directory exists by using the fs.existsSync() method. It returns true if it does.
+* we use the not operator (!) to negate the true to false so that we run the mkdir() func when the dir doesnt exist.
+* fs.existsSync() is a synchronous function and it will BLOCK further execution till it is finished executing
 */
-fs.mkdir('./assets', (err) => {
-    if(err){
-        console.log(err)
-    }
-    console.log('folder created')
-});
+if(! fs.existsSync('./assets')){
+    fs.mkdir('./assets', (err) => {
+        if(err){
+            console.log(err)
+        }
+        console.log('folder created');
+    });
+} else{
+    //if the directory already exists we will delete it.
+    //We can use the fs.rmdir() method to delete directoris
+    fs.rmdir('./assets', (err) => {
+        if(err){
+            console.log(err)
+        }
+        console.log('folder deleted');
+    });
+}
