@@ -1,7 +1,8 @@
-const xyz = require('./peoples.js')
-//Since we are importing an object from the poeples.js file or module, we need to access those lists 
-// in the same way we access properties of objects.
+//In order to import only specific things from files/modules, we can use object destructuring
+const {people}  = require('./peoples')
 
-console.log(xyz)
-console.log(xyz.ages)
-console.log(xyz.people)
+console.log(people)
+
+const {peoples, ages} = require('./peoples')
+
+console.log(people, ages)
