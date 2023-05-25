@@ -1,0 +1,16 @@
+STREAMS and BUFFERS
+
+Can't really define what a data stream is in NodeJS so here's an analogy instead:
+Suppose we have an empty pool near a large body of water. To fill up the pool we could either:
+
+A. fill up a big tank that is the same capacity as the pool then transport the tank and fill up the pool at 
+once using the tank.
+OR
+B. Create a stream of water from the large water bosy to the pool which transfers water little bit at a time
+and allows us to use the pool immediately with whatever little water is in it.
+
+Similarly we use Data streams when we have to read large files. The data is read and transferred little by little using a data stream.
+The stream transfers data BUFFERS that are basically small packets of data.
+
+We use a similar system when streaming videos. (observe that the video loads little by little and we don't
+have to wait for the whole video to download)
