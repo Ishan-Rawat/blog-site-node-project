@@ -3,13 +3,14 @@
 
 const fs = require('fs');
 
-//WRITING FILES:
-/* 1st arg is the file we want to write to
-* 2nd is the text we want to write
-* 3rd is the callback function that is called when writing is done
-* This is also an async function
+//creating and deleting DIRECTORIES:
+/*
+This function is async. 1st argument is where and what directory to create
+2nd argument is the callback function that is to be called when the directory creation is done
 */
-
-fs.writeFile('./docs/someText2.txt', 'Hello again', () => {
-    console.log('file was written');
+fs.mkdir('./assets', (err) => {
+    if(err){
+        console.log(err)
+    }
+    console.log('folder created')
 });
