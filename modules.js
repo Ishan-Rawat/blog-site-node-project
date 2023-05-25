@@ -1,8 +1,5 @@
-//In order to import only specific things from files/modules, we can use object destructuring
-const {people}  = require('./peoples')
+//Till now we have been importing from the module we made ourself.
+//There are some pre-defined modules available in Node too, which we can import. For example:
 
-console.log(people)
-
-const {peoples, ages} = require('./peoples')
-
-console.log(people, ages)
+const os = require('os');
+console.log(os.platform(), os.homedir());
