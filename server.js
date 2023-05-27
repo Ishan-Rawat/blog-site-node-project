@@ -1,16 +1,28 @@
-//Here we are creating a server that listens for requests coming from web browsers and send back responses.
+//Most of the times we need to send big HTML documents as responses. In that case it is much more efficient 
+//to read the html page from a file and then send it. 
 
 const http = require('http');
+const fs = require('fs'); //for reading the stored html file
 
 const server = http.createServer((req, res) => {
     console.log(req.url, req.method);
     
-
     res.setHeader('Content-Type', 'text/html');
-    res.write("<head><link rel='stylesheet' href='#'></head>");
-    res.write("<h1>HTML response</h1>");
-    res.write("<h2>Less goo</h2>");
-    res.end();
+
+    //send an HTML file
+    fs.readFile('./views/index.html', (err, data) => {
+        if(err){
+            console.log(err);
+            res.end()
+        } else{
+            /**We could either write:
+             * res.write(data);
+             * res.end();
+             * OR we can simply write:
+             */
+            res.end(data);
+        }
+    });
 });
 
 
