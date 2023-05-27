@@ -5,14 +5,11 @@ const http = require('http');
 const server = http.createServer((req, res) => {
     console.log(req.url, req.method);
     
-    /**In order to create a response object we first set its header
-     * For that we specify the header type, and what type of content we are sending such as plain text, HTTP, JSON, etc
-     * next we set the content of the response using res.write() method
-     * Then we close the header using res.end() and then send it.
-     */
 
-    res.setHeader('Content-Type', 'text/plain');
-    res.write('Harro EveryNyan');
+    res.setHeader('Content-Type', 'text/html');
+    res.write("<head><link rel='stylesheet' href='#'></head>");
+    res.write("<h1>HTML response</h1>");
+    res.write("<h2>Less goo</h2>");
     res.end();
 });
 
