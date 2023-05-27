@@ -4,13 +4,16 @@ const http = require('http');
 
 const server = http.createServer((req, res) => {
     console.log(req.url, req.method);
-    //The request object contains a LOT of details. 
-    //So here we are only logging the request url and the request type such as GET and POST (this is given by req.method)
-    /*
-    The output of req.url is the part succeeding the localhost:3000 part.
-    For example, if the request url is http://localhost:3000/about then console.log will return:
-    /about
-    */
+    
+    /**In order to create a response object we first set its header
+     * For that we specify the header type, and what type of content we are sending such as plain text, HTTP, JSON, etc
+     * next we set the content of the response using res.write() method
+     * Then we close the header using res.end() and then send it.
+     */
+
+    res.setHeader('Content-Type', 'text/plain');
+    res.write('Harro EveryNyan');
+    res.end();
 });
 
 
