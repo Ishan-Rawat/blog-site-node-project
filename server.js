@@ -1,25 +1,35 @@
-//Most of the times we need to send big HTML documents as responses. In that case it is much more efficient 
-//to read the html page from a file and then send it. 
-
+// BASIC ROUTING
+/**When we run the previous code, the server just sent back the same response no matter what URL we requested
+ * That makes for a very crappy website.
+ * The following code sends the specific  HTML page the user is requesting, and sends a 404 page if the requested page doesn't exist
+ */
 const http = require('http');
 const fs = require('fs'); //for reading the stored html file
 
 const server = http.createServer((req, res) => {
-    console.log(req.url, req.method);
+    //console.log(req.url, req.method);
     
     res.setHeader('Content-Type', 'text/html');
 
-    //send an HTML file
-    fs.readFile('./views/index.html', (err, data) => {
+    let path = './views/';
+
+    switch(req.url){
+        case '/':
+            path += 'index.html';
+            break;
+        case '/about':
+            path += 'about.html';
+            break;
+        default:
+            path += '404.html';
+            break;
+    }
+
+    fs.readFile(path, (err, data) => {
         if(err){
             console.log(err);
             res.end()
         } else{
-            /**We could either write:
-             * res.write(data);
-             * res.end();
-             * OR we can simply write:
-             */
             res.end(data);
         }
     });
