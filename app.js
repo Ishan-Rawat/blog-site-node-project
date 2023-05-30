@@ -19,3 +19,10 @@ app.get('/', (req, res) => {
 app.get('/about', (req, res) => {
     res.sendFile('./views/about.html', {root: __dirname});
 });
+
+//REDIRECTS
+app.get('/about-us', (req, res) => {
+    res.redirect('/about');
+    //This method forces the browser to change the request to /about or something not sure
+    //automatically sets the status code to 301 (checked it on chrome, it was 302)
+});
