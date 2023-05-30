@@ -1,0 +1,12 @@
+In the express app that we created, we are just sending static HTML files back to the browser. Static cuz they dont change and are the same for all users.
+What if we want to insert some dynamic content to our responses, like data from a database (which can be like user data for user profiles, data for blog posts, etc.)
+For this we use view engines.
+
+View Engines or Template Engines allow us to write html templates in a syntax similar to html and also allow us to insert dynamic content into these templates and serve the resulting html page.
+
+Express allows us to very easily use template/view engines. This happens to be one the pros of express.
+
+There are many view engines available like express handlebars, pug,etc., but here we will use EJS.
+
+STEP 1 of using: run npm install ejs.
+then rest of the steps are covered in app.js comments
