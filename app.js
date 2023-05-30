@@ -5,14 +5,17 @@ const express = require('express');
 
 const app = express();
 
-app.listen(3000); //we gave it the port number as arg. It infers the localhost part
-// (not sure) the above code also returns an instance of the server that we can store in a variable for use in the future for things like socket programming.
+app.listen(3000); 
 
 //The following code routes a response for the localhost:3000 request URL
+//This time we are sending a HTML response by reading a file
 app.get('/', (req, res) => {
-    res.send('<p>home page</p>');
-    /**Here we did not have to specify res.write() then res.end()
-     * Also, this method infers the type of content being sent and sets the header type by itself
-     * It can even decide the status code by itself. Here it will be 200
-     */
+    res.sendFile('./views/index.html', {root: __dirname});
+    //The sendFile() method treats the first argument as an absolute path by default.
+    //Since we have given it a relative path, in the next argument we give it an object that tells it what the current directory is(so that it can resolve the relative path)
+});
+
+//To respond to other request URLs we can jus create more app.get calls(not sure what the correct word is)
+app.get('/about', (req, res) => {
+    res.sendFile('./views/about.html', {root: __dirname});
 });
