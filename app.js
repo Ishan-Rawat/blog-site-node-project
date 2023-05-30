@@ -19,7 +19,9 @@ app.get('/about-us', (req, res) => {
 // To send a default response for invalid URLs, we use the following function:
 // We use the .use() function to create and fire middleware 
 app.use((req, res) => {
-    res.sendFile('./views/404.html', {root: __dirname});
+    res.status(404).sendFile('./views/404.html', {root: __dirname});
+    //Previously when we sent the 404 response, the status code for it was 200
+    //If we wish to send the status code 404, we use the status() method. This method also sends the response object, so we just 'tack on' the .sendFile() method at the end of it.
 });
 
 /**How this works is that for every request encountered Node tries to match the request URL with the .get() methods from top to bottom
