@@ -18,7 +18,11 @@
             <li><a href="/blogs/create">New blog</a></li>
         </ul>
     </nav>
+    <!-- To add dynamic content (such as the following JS code) we need to use <% %> tags and <%= %> -->
+    <% let name = 'mario' %>
+    <h2>My name is: <%= name %></h2>
 
+    <!-- The above was a very simple example. In the next commit we will see how to inject content from the app.js file into the templates -->
     <div class="blogs content">
         <h2>All Blogs</h2>
     </div>
