@@ -21,6 +21,17 @@
     </nav>
     <div class="blogs content">
         <h2>All Blogs</h2>
+        <!-- First up we will check if the array  of blogs is not empty -->
+        <% if(blogs.length > 0) { %>  <!--Notice that we are putting the closing bracket in a different tag-->
+            <% blogs.forEach(blog => { %>
+                
+                <h3 class="title"><%= blog.title %></h3>
+                <p class="snippet"><%= blog.snippet%></p>
+
+            <% }) %>
+        <% } else {%>
+            <p>No logs to display at the moment (；′⌒`)</p>
+        <% } %>
     </div>
 </body>
 </html>
