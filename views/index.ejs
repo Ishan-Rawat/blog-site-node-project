@@ -1,24 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Here we are accessing the title property specified in the handler function, and appending it to the page's title -->
-    <title>Node JS crash course | <%= title%></title>
-</head>
+<!-- Notice that instead of using <"%=" we used <"%-" -->
+<!-- This is because <"%=" coverts the content into a string -->
+<%- include('./partials/head.ejs') %>
+
 <body>
-    <nav>
-        <div class="site_title">
-            <a href="/"><h1>Blog Ninja</h1></a>
-            <p>A net ninja site</p>
-        </div>
-        <ul>
-            <li><a href="/">Blogs</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/blogs/create">New blog</a></li>
-        </ul>
-    </nav>
+    
+    <%- include('./partials/nav.ejs') %>
+
     <div class="blogs content">
         <h2>All Blogs</h2>
         <!-- First up we will check if the array  of blogs is not empty -->
@@ -33,5 +22,6 @@
             <p>No logs to display at the moment (；′⌒`)</p>
         <% } %>
     </div>
+    <%- include('./partials/footer.ejs') %>
 </body>
 </html>

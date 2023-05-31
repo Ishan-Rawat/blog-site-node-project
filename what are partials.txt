@@ -1,0 +1,6 @@
+In our current solution all our template files have a lot of common content (for ex., the head and the nav section).
+Now suppose we wanted to add a new link in the nav section. To this we would have to modify all the templates we have. This aint good.
+
+So for this, we can create partial template files or partials. These partials would contain the common sections, such as the nav section, and then
+they can be imported in all the template files.
+Then, whenever we have to change the common sections, we cun just modify the partials.

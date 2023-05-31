@@ -10,3 +10,9 @@ There are many view engines available like express handlebars, pug,etc., but her
 
 STEP 1 of using: run npm install ejs.
 then rest of the steps are covered in app.js comments
+
+
+what is SERVER SIDE RENDERING:
+our template files are stored on the server.
+When requested, the view engine injects content into them and processes them to create HTML files. This is called server side rendering 
+The produced HTML files are then sent as a response
