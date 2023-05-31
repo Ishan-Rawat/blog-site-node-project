@@ -1,0 +1,5 @@
+Middleware refers to the functions that run between the time a request is recieved and the time a response is sent.
+The middleware is diffrerent for different requests?
+Middleware can consist of multiple functions.
+The handler functions we used in app.js constitute middleware for our app. Each of those functions can be called middleware.
+
