@@ -15,6 +15,10 @@ app.set('view engine', 'ejs');
  */
 app.use(morgan('dev'));
 
+//middleware to access static files, such as CSS and images
+app.use(express.static('public')); //This function takes a directory as an argument. The files stored  in that directory become publicly accessable
+// Notice  that in head.ejs in the <link> tag we specify /style.css and not /public/style.css
+
 app.get('/', (req, res) => {
     
     const blogs = [

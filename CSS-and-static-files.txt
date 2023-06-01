@@ -1,0 +1,8 @@
+Our node server protects the static files on the server. For example, if I go to http://localhost:3000/CSS-and-static-files.txt it wont just render this txt in the browser.
+
+The issue with this is that suppose if we want to put our CSS in a seperate file instead of in the head.ejs file, we would create a styles.css file, and then in the head section we would write:
+<link rel="stylesheet" href="">
+This wouldnt work. if we would load the homepage and inspect>network we would see that the html part of our homepage gets rendered just fine, but it will show a 404 status code for the request for the styles.css file.
+
+Therefore, we need to use a built-in middleware function of node called express.static()
+Now go read the notes-comments in the app.js file.
