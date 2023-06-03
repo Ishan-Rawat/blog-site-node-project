@@ -1,23 +1,34 @@
 const express = require('express');
 const morgan = require('morgan');
+const mongoose = require('mongoose'); //run nom install mongoose
 
 const app = express();
+// Read Notion notes titled: "MongoDB and Mongoose Basics" first.
+//MongoDB URI
+const dbURI = "mongodb+srv://nodeUser:nodetutorials123@cluster0.x5ryrpu.mongodb.net/?retryWrites=true&w=majority"
+/**doubt: in the tutorial, in the auto generated URI after mongodb.net/ it had test?retryWrites....
+ * The instructor then changes test? to node-tuts?... which happens to be the database name.
+ * In my case, the auto generated URI has neither test, nor my database name. what to do?.
+ * The mongoDB "console" does show connection made successfully.
+ */
+
+//mongoose.connect(dbURI); //The method expects the connection URI as the argument.
+//The youtube instructor got a deprecation warning when he just left the line like this. To solve it he provided an options object as the secong argument.
+//I am not facing the same issue for some reason.
+
+mongoose.connect(dbURI).then((result) => { //the .connnect() method is an asynchronous method and returns a promise. Thus we can tack on the .then() method to it.
+    console.log(result);
+}).catch((err) => {
+    console.log(err);
+});
 
 app.listen(3000); 
 
 app.set('view engine', 'ejs');
 
-//USING THIRD-PARTY MIDDLEWARE
-/**In this case we will use a third party middleware called morgan. It used for logging
- * STEP 1: in the terminal run npm install morgan
- * STEP 2: import it into this file
- * STEP 3: invoke it in this file
- */
 app.use(morgan('dev'));
 
-//middleware to access static files, such as CSS and images
-app.use(express.static('public')); //This function takes a directory as an argument. The files stored  in that directory become publicly accessable
-// Notice  that in head.ejs in the <link> tag we specify /style.css and not /public/style.css
+app.use(express.static('public')); 
 
 app.get('/', (req, res) => {
     
