@@ -12,24 +12,32 @@ mongoose.connect(dbURI)
     .then((result) => app.listen(3000))
     .catch((err) => console.log(err));
  
-
-//Creating a test route for testing connectivity with the database using the model we just created
 app.get('/add-blog', (req, res) => {
-    //Creating a blog document using a new instance of the Blog model
-    //Here we must provide values to all the properties that we defined in the schema, exceept the timestamp properties.
     const blog = new Blog({
         title: "new blog",
         snippet: "about my new blog",
         body: "more about my new blog"
     });
-    //The instance of a model provides us many methods, here we will use the save() method to save the doc we just defined above
     blog.save()
         .then((result) => res.send(result))
         .catch((err) => console.log(err))
 });
-//When we run this and visit localhost:3000/add-blog it shows an object representation of the blog, which is sent back by MongoDB once it has saved the document
-//Also, after going to the mongoDB dashboard I found out that it stored the document in the blogs collection in a test Database it created itself.
-//Thus, doubt clear, we do need to specify the database name in the URI.
+
+//Now lets query the database for all the blogs stored in it
+app.get('/all-blogs', (req, res) => {
+    //This time we don't need a new instance of the Blog model because we are not creating any document(huh?)
+    // .find() method just returns all the documents in the collection
+    Blog.find()
+        .then((result) => res.send(result))
+        .catch((err)=> console.log(err))
+});
+//Finding a single blog using its ID
+app.get('/single-blog', (req, res) => {
+    Blog.findById('647b21df46388b47da09b307')
+        .then((result) => res.send(result))
+        .catch((err) => console.log(err));
+    //MongoDB doesn't actually store document IDs as strings, but when we query it, it converts them into strings for comparision or something.
+});
 
 app.set('view engine', 'ejs');
 
