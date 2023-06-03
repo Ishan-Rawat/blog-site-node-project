@@ -5,7 +5,7 @@ const Blog = require('./models/blog');
 
 const app = express();
 
-const dbURI = "mongodb+srv://nodeUser:nodetutorials123@cluster0.x5ryrpu.mongodb.net/?retryWrites=true&w=majority"
+const dbURI = "mongodb+srv://nodeUser:nodetutorials123@cluster0.x5ryrpu.mongodb.net/node-tuts?retryWrites=true&w=majority"
 
 
 mongoose.connect(dbURI)
