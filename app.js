@@ -43,18 +43,12 @@ app.get("/blogs", (req, res)=> {
 
 //handling the post request from the create a blog form
 app.post('/blogs', (req, res) =>{
-    //we need access to the data that comes with the POST request. 
-    //For that we will use some middleware that parses the incoming data and writes it in a format that we
-    // can use, and attach it to the request object. Read lines: 20, 21 
-
-    //NOW, our form data will be attached to the "body" property of the request object
-    console.log(req.body);
-    /**Output:
-     * {
-     * title: "Ishan's blog",
-     * snippet: 'new day new blog',
-     * body: 'asdfghjkl'}
-     */
+    const blog = new Blog(req.body);
+    blog.save()
+        .then((result) => {
+            res.redirect('/blogs');
+        })
+        .catch((err) => console.log(err))
 });
 
 app.use((req, res) => {
