@@ -1,0 +1,9 @@
+request parameters are parts of the ROUTE that can change or act like variables
+for example, we can use a request parameter to get and show a specific blog document:
+    localhost:3000/blogs/:id 
+The request parameter can take values like:
+localhost:3000/blogs/1244324
+localhost:3000/blogs/hello
+localhost:3000/blogs/50
+
+next up read the index.ejs file.
