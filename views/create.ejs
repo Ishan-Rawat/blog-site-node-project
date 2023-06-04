@@ -6,16 +6,21 @@
     <%- include('./partials/nav.ejs') %>
 
     <div class="create-blog content">
-        <form>
+        <form action="/blogs" method="POST">
+            <!-- To get the data we filled in the form in the form of a POST request we need to add some code -->
+            <!-- 1. in the form tag we add some properties -->
+            <!-- action="/blogs" means the request is sent to /blogs url -->
+            <!-- 2. We need to add name attribute to the input tags -->
             <label for="title">Blog title:</label>
-            <input type="text" id="title
-            " required>
+            <input type="text" id="title" name="title" required>
+            
             <label for="snippet">Blog snippet:</label>
-            <input type="text" id="snippet
-            " required>
+            <input type="text" id="snippet" name="snippet" required>
+            
             <label for="body">Blog body:</label>
-            <textarea id="body" required></textarea>
+            <textarea id="body" name="body" required></textarea>
             <button>Submit</button>
+            <!-- next read the comments in app.js where we handle this request -->
         </form>
     </div>
     <%- include('./partials/footer.ejs') %>

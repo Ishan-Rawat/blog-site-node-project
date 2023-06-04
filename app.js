@@ -17,12 +17,10 @@ app.set('view engine', 'ejs');
 
 app.use(morgan('dev'));
 app.use(express.static('public')); 
-
-//We deleted all those sandbox routes and will integrate that functionality in the routes below.
-// Below we have the routes that don't deal with the database and some new routes that deal with the DB
+app.use(express.urlencoded({ extended: true}));
+//It parses the data that comes encoded in the url and parses it into an object that we can use
 
 app.get('/', (req, res) => {
-    //instead of rendering a veiw here we will redirect this to a new route that displays all the existing blogs
     res.redirect('/blogs');
 });
 
@@ -36,13 +34,27 @@ app.get('/blogs/create', (req, res) => {
 
 //blog routes
 app.get("/blogs", (req, res)=> {
-    Blog.find().sort({createdAt: -1}) //createdAt: sort by creation time, -1 value means descending order
+    Blog.find().sort({createdAt: -1})
         .then((result) => {
-            //our index.ejs view already has code to take an array of blogs and render them in html so we will reuse it
-            //cuz what mongoDB returns is also an array of blogs
             res.render('index', {title: 'all blogs', blogs: result})
         })
         .catch((err) => console.log(err))
+});
+
+//handling the post request from the create a blog form
+app.post('/blogs', (req, res) =>{
+    //we need access to the data that comes with the POST request. 
+    //For that we will use some middleware that parses the incoming data and writes it in a format that we
+    // can use, and attach it to the request object. Read lines: 20, 21 
+
+    //NOW, our form data will be attached to the "body" property of the request object
+    console.log(req.body);
+    /**Output:
+     * {
+     * title: "Ishan's blog",
+     * snippet: 'new day new blog',
+     * body: 'asdfghjkl'}
+     */
 });
 
 app.use((req, res) => {

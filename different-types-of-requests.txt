@@ -1,0 +1,28 @@
+1. GET: requests access of some resource from the server. This can be be an html response or even a json file.
+till now we have been handling only get requests.
+
+2. POST: requests to create new data (eg. a new blog)
+3. DELETE: requests to delete data (eg. delete a particular blog)
+4. PUT: requests to update data (eg. update a blog)
+
+So far we have been sending get requests from the browser and handling them from the server
+        ROUTE                             | request type
+--------------------------------------------------------------------------------------------------------------
+1. localhost:3000/blogs                   | GET
+2. localhost:3000/blogs/create            | GET (gets the form to create a new blog)
+3. localhost:3000/blogs                   | POST
+                                          |
+4. localhost:3000/blogs/:id               | GET (gets a specific blog)
+5. localhost:3000/blogs/:id               | DELETE (delete a specific blog)
+6. localhost:3000/blogs/:id               | PUT (update a specific blog)
+
+
+we would go to the number 2 route, fill up the form and press enter. This would send a POST request using
+route number 3, which is the same as route 1!
+--> We can send different types of requests using the same route.
+And those different types of requests can be handled differently on the server.
+
+
+
+next up we will see how to get a POST request from our blogs/create page, so read the comments in the 
+views/create.ejs file
