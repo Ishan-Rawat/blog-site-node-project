@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const Blog = require('./models/blog');
+const { render } = require('ejs');
 
 const app = express();
 
@@ -49,6 +50,19 @@ app.post('/blogs', (req, res) =>{
             res.redirect('/blogs');
         })
         .catch((err) => console.log(err))
+});
+app.get('/blogs/:id', (req, res) => {
+    const id = req.params.id; 
+    /**in the route URL, the ':' in front of the '/' tells node that 'id' is a request parameter
+     * after req.params the next property will be named whatever the request param will be named
+     * if req param is /blogs/:balls then we would have written const id = req.params.balls
+    */
+    Blog.findById(id)
+        .then((result) => {
+            res.render('details', {blog: result, title: 'blog details'})
+            //after this we will create a view called details
+        })
+        .catch(err => console.log(err))
 });
 
 app.use((req, res) => {
