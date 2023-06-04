@@ -36,7 +36,7 @@ app.get('/blogs/create', (req, res) => {
 
 //blog routes
 app.get("/blogs", (req, res)=> {
-    Blog.find()
+    Blog.find().sort({createdAt: -1}) //createdAt: sort by creation time, -1 value means descending order
         .then((result) => {
             //our index.ejs view already has code to take an array of blogs and render them in html so we will reuse it
             //cuz what mongoDB returns is also an array of blogs
