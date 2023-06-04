@@ -11,48 +11,19 @@ const dbURI = "mongodb+srv://nodeUser:nodetutorials123@cluster0.x5ryrpu.mongodb.
 mongoose.connect(dbURI)
     .then((result) => app.listen(3000))
     .catch((err) => console.log(err));
- 
-app.get('/add-blog', (req, res) => {
-    const blog = new Blog({
-        title: "new blog",
-        snippet: "about my new blog",
-        body: "more about my new blog"
-    });
-    blog.save()
-        .then((result) => res.send(result))
-        .catch((err) => console.log(err))
-});
 
-//Now lets query the database for all the blogs stored in it
-app.get('/all-blogs', (req, res) => {
-    //This time we don't need a new instance of the Blog model because we are not creating any document(huh?)
-    // .find() method just returns all the documents in the collection
-    Blog.find()
-        .then((result) => res.send(result))
-        .catch((err)=> console.log(err))
-});
-//Finding a single blog using its ID
-app.get('/single-blog', (req, res) => {
-    Blog.findById('647b21df46388b47da09b307')
-        .then((result) => res.send(result))
-        .catch((err) => console.log(err));
-    //MongoDB doesn't actually store document IDs as strings, but when we query it, it converts them into strings for comparision or something.
-});
 
 app.set('view engine', 'ejs');
 
 app.use(morgan('dev'));
-
 app.use(express.static('public')); 
 
+//We deleted all those sandbox routes and will integrate that functionality in the routes below.
+// Below we have the routes that don't deal with the database and some new routes that deal with the DB
+
 app.get('/', (req, res) => {
-    
-    const blogs = [
-        {title: "Paste some Gibberish here", snippet: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, praesentium!"},
-        {title: "Paste some Gibberish here", snippet: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, praesentium!"},
-        {title: "Paste some Gibberish here", snippet: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, praesentium!"}
-    ]
-    res.render('index', {title : "Blog", blogs});
+    //instead of rendering a veiw here we will redirect this to a new route that displays all the existing blogs
+    res.redirect('/blogs');
 });
 
 app.get('/about', (req, res) => {
@@ -61,6 +32,17 @@ app.get('/about', (req, res) => {
 
 app.get('/blogs/create', (req, res) => {
     res.render('create', {title : "Create a Blog"});
+});
+
+//blog routes
+app.get("/blogs", (req, res)=> {
+    Blog.find()
+        .then((result) => {
+            //our index.ejs view already has code to take an array of blogs and render them in html so we will reuse it
+            //cuz what mongoDB returns is also an array of blogs
+            res.render('index', {title: 'all blogs', blogs: result})
+        })
+        .catch((err) => console.log(err))
 });
 
 app.use((req, res) => {
