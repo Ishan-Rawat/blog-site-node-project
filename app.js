@@ -30,7 +30,9 @@ app.get('/about', (req, res) => {
 });
 
 //we will now put all handlers with routes starting with /blogs in the blogRoutes.js file
-app.use(blogRoutes);
+app.use('/blogs', blogRoutes);
+//by specifying the 1st argument as '/blogs' we have scoped the handler
+//this means that it will apply the routes in blogRoutes only when the request URL starts with /blogs
 
 app.use((req, res) => {
     res.status(404).render('404', {title : "Not found :("});
