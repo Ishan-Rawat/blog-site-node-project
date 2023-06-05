@@ -1,0 +1,18 @@
+MVC stands for Model View Controller, and its basically just a way of structuring our code and files so that 
+they are more modular, reusable and etc.
+Its not really necessary to use, but it helps as our project become bigger.
+
+We have already seen Models(they help in interacting with the DB)
+Views(they are templates for the html to be sent back to browsers)
+
+What are controllers:
+
+ -------         ------------          ------
+ |model|<------->|controller|<-------->|view|
+ -------         ------------          ------
+
+They have the job of taking data from models and passing that data into the views.
+Now, we have already written this functionality in the handler functions of routes. So what we'll do now
+is extract that logic and put it into controller functions and then we'll invoke those functions in the route handlers.
+
+so next up we will create a directory named controllers, and make a file in it called blogControllers.js in it.
