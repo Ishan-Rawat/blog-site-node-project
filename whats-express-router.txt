@@ -1,0 +1,6 @@
+The express router() functionality basically allows us to take the handler functions in app.js file and put them in separate files, such as one file for all the hadlers starting with /blogs, etc.
+This allows us to simplify the app.js file and a whole bunch of other benefits.
+
+Steps:
+1. Create a directory called routes, and inside it a file called blogRoutes.js
+2. Read the blogRoutes.js file.
