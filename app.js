@@ -53,14 +53,25 @@ app.post('/blogs', (req, res) =>{
 });
 app.get('/blogs/:id', (req, res) => {
     const id = req.params.id; 
-    /**in the route URL, the ':' in front of the '/' tells node that 'id' is a request parameter
-     * after req.params the next property will be named whatever the request param will be named
-     * if req param is /blogs/:balls then we would have written const id = req.params.balls
-    */
+    
     Blog.findById(id)
         .then((result) => {
             res.render('details', {blog: result, title: 'blog details'})
-            //after this we will create a view called details
+        })
+        .catch(err => console.log(err))
+});
+app.delete('/blogs/:id', (req, res) => {
+    const id = req.params.id;
+    Blog.findByIdAndDelete(id) //The method does what it says, and its an async method, so...
+        .then(result => {
+            /**Here we will send some JSON back to the browser
+             * Why not a redirect? Because the front-end JS code in details.ejs sends an AJAX request
+             * We cannot redirect as a result of a AJAX result, we must send some JSON or text data back
+             * 
+             * But the JSON data that we will send back to the browser will have a redirect property.
+             * The front-end JS will parse that redirect property and get the URL we want to redirect to.
+             */
+            res.json({ redirect: '/blogs'});
         })
         .catch(err => console.log(err))
 });

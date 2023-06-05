@@ -12,8 +12,33 @@
         <div class="content">
             <p><%= blog.body %></p>
         </div>
+        <!-- To implement delete functionality we will create a delete button in this view -->
+        <!-- This will send a delete request to the server then the server will access the DB and delete -->
+        <a class="delete" data-doc="<%= blog._id %>" >delete</a>
+        <!-- data- is a way of defining custom attributes in HTML, here data-doc attr will have the blog's id as its value -->
+        <!-- To send a delete request when this button is clicked we will specify some front-end JS below -->
     </div>
 
     <%- include('./partials/footer.ejs') %>
+
+    <script>
+        const trashcan = document.querySelector('a.delete');
+
+        trashcan.addEventListener('click', (e) => {
+            const endpoint = `/blogs/${trashcan.dataset.doc}`; //.dataset is used to access the data- attributes
+            // next read app.js
+            fetch(endpoint, {
+                method: 'DELETE'
+            })
+            .then((response) => {
+                //we cannot directly access the JSON data the server returns, so we use the following method:
+                return response.json(); //This method parses the JSON data and returns a JS object that we can use, as a JS promise, so one more .then()
+                //console.log('this method did indeed fire')
+                //Also note that the RETURN statement above is important
+            })
+            .then(data => window.location.href = data.redirect)
+            .catch(err => console.log(err))
+        });
+    </script>
 </body>
 </html>
